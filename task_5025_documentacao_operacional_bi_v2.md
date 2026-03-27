@@ -111,7 +111,7 @@ O diagrama abaixo mostra o caminho completo dos dados, da origem até o dashboar
 ║  ② MODELO SEMÂNTICO — Power BI Desktop (.pbix)              ║
 ║                                                              ║
 ║  · Relacionamentos entre tabelas                             ║
-║  · 68 medidas DAX (Alertas, Conectividade, Tecnologias...)   ║
+║  · Medidas DAX (Alertas, Conectividade, Tecnologias...)   ║
 ║  · Parâmetros de conexão (ServerName, Environment, etc.)     ║
 ║  · Funções Power Query (fnGetTable, fnGetConnection)         ║
 ╚══════════════════════════════════════════════════════════════╝
@@ -139,7 +139,7 @@ O diagrama abaixo mostra o caminho completo dos dados, da origem até o dashboar
 
 - O Gateway é obrigatório na etapa ③ — sem ele o Service não consegue alcançar o MySQL da AWS (rede privada). Se o Gateway estiver offline, o refresh falha inteiramente.
 - As tabelas `dCalendário` e `_att_at` são geradas em runtime no modelo, sem depender de nenhuma fonte externa. Não falham por problema de conectividade.
-- O parâmetro `Environment` controla qual banco o modelo acessa. Atualmente está em `Dev` — deve ser alterado para `Production` antes da publicação definitiva.
+- O parâmetro `Environment` controla qual banco o modelo acessa. Atualmente está em `Dev`.
 - A tabela `d_versao_software` tem dependência exclusiva do SharePoint. Uma falha nela não impede o carregamento das demais tabelas, mas remove o status de firmware do dashboard.
 
 ### 1.5 Dependências Externas e Pontos de Falha
@@ -235,7 +235,7 @@ O diagrama abaixo mostra o caminho completo dos dados, da origem até o dashboar
 | Erro "Gateway not reachable" | Gateway offline ou sem conectividade com o RDS |
 | Erro "Unable to connect to the server" | IP do gateway bloqueado no Security Group AWS ou RDS fora do ar |
 | Erro em `d_versao_software` apenas | Arquivo Excel no SharePoint movido, renomeado ou com permissão revogada |
-| Refresh concluído mas dados desatualizados | Parâmetro `Environment` incorreto — verificar se aponta para `Production` |
+| Refresh concluído mas dados desatualizados | Parâmetro `Environment` incorreto |
 | "Última Atualização" mostra data antiga | Refresh não executou no dia — verificar histórico no Power BI Service |
 
 ### 2.4 Validações Mínimas Pós-Refresh
